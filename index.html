@@ -22,13 +22,16 @@
 				<!-- Form with fields for title date and note. Hidden field for id #-->
 				<form>
 					<label for="number">Note ID #</label>
-					<input type="number" name="idNumber" id="">
+					<input type="number" name="idNumber" id="inputId">
 					<label for="title">Title:</label>
-					<input type="text" name="title" id="">
+					<input type="text" name="title" id="inputTitle">
 					<label for="date">Date:</label>
-					<input type="date" name="date" id="">
+					<input type="date" name="date" id="inputDate">
 					<label for="noteText">Note:</label>
-					<input type="text" name="noteText" id="">
+					<input type="text" name="noteText" id="inputNote">
+					<!-- Div for response from data Validation -->
+					<div class="validationMsg"></div>
+					<button type="submit">Add Note</button>
 				</form>
 			</section>
 			<!-- Display Notes Section -->
