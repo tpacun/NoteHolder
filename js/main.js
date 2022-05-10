@@ -1,8 +1,17 @@
+// variable declaration
+
+let displayedNotes = document.querySelector('.notesDiv')
+let inputId = document.querySelector('#inputId')
+let inputTitle = document.querySelector('#inputTitle')
+let inputDate = document.querySelector('#inputDate')
+let inputNote = document.querySelector('#inputNote')
+let validationMsg = document.querySelector('.validationMsg')
+let form = document.querySelector('form')
+let data = []
+
 // call load function at top of page
 
-// declare form variable
-
-let form = document.querySelector('form')
+readData()
 
 // add eventlistener and function to call when submit button is clicked
 
@@ -13,14 +22,7 @@ form.addEventListener('submit', (event) => {
 
 // function - data validation for form
 
-    // declare form variables
-let inputId = document.querySelector('#inputId')
-let inputTitle = document.querySelector('#inputTitle')
-let inputDate = document.querySelector('#inputDate')
-let inputNote = document.querySelector('#inputNote')
-let validationMsg = document.querySelector('.validationMsg')
-
-    // function - rejects inputs if any of the fields are blank
+// function - rejects inputs if any of the fields are blank
 
 let formValidator = () => {
     if (inputId.value === '') {
@@ -42,7 +44,7 @@ let formValidator = () => {
 }
 
 // function - write data to localstorage
-let data = []
+
 
 let acceptData = () => {
     readData()
@@ -59,7 +61,7 @@ let acceptData = () => {
 
 // function - load data from localstorage and display on page
 
-let readData = () => {
+function readData() {
     data = JSON.parse(localStorage.getItem('data'))
     
     // not sure if will/would have reason to keep this separate from placing updated data into the html, but going to keep the load/parsing separate from that for now
@@ -75,17 +77,17 @@ let readData = () => {
 
 // function - load notes into html
 
-let displayedNotes = document.querySelector('.notesDiv')
 
-let createNotes = () => {
+
+function createNotes() {
     displayedNotes.innerHTML = '' // reset notes
     data.forEach((note, i) => {
         displayedNotes.innerHTML += `
-        <div id="">
+        <div id="container${note.id}">
 						<h3 id="title${note.id}">${note.title}</h3>
 						<div>
-							<button>Edit Note</button>
-							<button>Delete Note</button>
+							<button id="editButton${note.id}">Edit Note</button>
+							<button id="deleteButton${note.id}>Delete Note</button>
 						</div>
 						<span id="date${note.id}">${note.date}</span>
 						<span id="id${note.id}">${note.id}</span>
@@ -93,15 +95,26 @@ let createNotes = () => {
 					</div>
         `
         // need to add event listeners to each button which calls a function which ACCEPTS an id
+        document.querySelector(`#editButton${note.id}`).addEventListener('click', editNote(note.id))
+        document.querySelector(`#deleteButton${note.id}`).addEventListener('click', deleteNote(note.id))
     })
 }
 
 // function - for edit button, moves data to form, removes data from localstorage
+
+function editNote(num) {
+
+}
+
     // perhaps write delete function first - easier
     // needs to accept an id #
     // needs to deal with it in relativity
 
 // function - for delete button, removes data from localstorage
+
+function deleteNote(num) {
+    document.querySelector(`container${num}`).remove()
+}
     // same as above, needs to function relatively
 
 // function - clear form (reset)
