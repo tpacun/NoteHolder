@@ -45,7 +45,7 @@ let formValidator = () => {
 let data = []
 
 let acceptData = () => {
-    data = readData()
+    readData()
     data.push({
         'id': inputId.value,
         'title': inputTitle.value,
@@ -64,7 +64,13 @@ let readData = () => {
     
     // not sure if will/would have reason to keep this separate from placing updated data into the html, but going to keep the load/parsing separate from that for now
 
-    createNotes()
+    // adding conditional to check for if there is data (will be null and throw error if empty)
+    if (data !== null) {
+        createNotes()
+    }
+    else {
+        data = []
+    }
 }
 
 // function - load notes into html
@@ -76,22 +82,26 @@ let createNotes = () => {
     data.forEach((note, i) => {
         displayedNotes.innerHTML += `
         <div id="">
-						<h3>${note.title}</h3>
+						<h3 id="title${note.id}">${note.title}</h3>
 						<div>
 							<button>Edit Note</button>
 							<button>Delete Note</button>
 						</div>
-						<span>${note.date}</span>
-						<span>${note.id}</span>
-						<p>${note.note}</p>
+						<span id="date${note.id}">${note.date}</span>
+						<span id="id${note.id}">${note.id}</span>
+						<p id="note${note.id}>${note.note}</p>
 					</div>
         `
+        // need to add event listeners to each button which calls a function which ACCEPTS an id
     })
 }
 
-
 // function - for edit button, moves data to form, removes data from localstorage
+    // perhaps write delete function first - easier
+    // needs to accept an id #
+    // needs to deal with it in relativity
 
 // function - for delete button, removes data from localstorage
+    // same as above, needs to function relatively
 
 // function - clear form (reset)
