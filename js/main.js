@@ -52,7 +52,7 @@ let acceptData = () => {
         'id': inputId.value,
         'title': inputTitle.value,
         'date': inputDate.value,
-        'note': inputNote.value
+        'note': inputNote.value,
     })
     localStorage.setItem('data', JSON.stringify(data))
     console.log('Data Accepted', data)
@@ -87,7 +87,7 @@ function createNotes() {
 						<h3 id="title${note.id}">${note.title}</h3>
 						<div>
 							<button id="editButton${note.id}">Edit Note</button>
-							<button id="deleteButton${note.id}>Delete Note</button>
+							<button id="deleteButton${note.id}">Delete Note</button>
 						</div>
 						<span id="date${note.id}">${note.date}</span>
 						<span id="id${note.id}">${note.id}</span>
@@ -95,8 +95,8 @@ function createNotes() {
 					</div>
         `
         // need to add event listeners to each button which calls a function which ACCEPTS an id
-        document.querySelector(`#editButton${note.id}`).addEventListener('click', editNote(note.id))
-        document.querySelector(`#deleteButton${note.id}`).addEventListener('click', deleteNote(note.id))
+        document.querySelector(`#editButton${note.id}`).addEventListener('click', () => {editNote(note.id)})
+        document.querySelector(`#deleteButton${note.id}`).addEventListener('click', () => {deleteNote(note.id)})
     })
 }
 
@@ -113,7 +113,7 @@ function editNote(num) {
 // function - for delete button, removes data from localstorage
 
 function deleteNote(num) {
-    document.querySelector(`container${num}`).remove()
+    document.querySelector(`#container${num}`).remove()
 }
     // same as above, needs to function relatively
 
