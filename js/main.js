@@ -103,18 +103,16 @@ function createNotes() {
 // function - for edit button, moves data to form, removes data from localstorage
 
 function editNote(num) {
-
-}
-
     // perhaps write delete function first - easier
     // needs to accept an id #
     // needs to deal with it in relativity
-
+    // also might need to rethink structure of data object - perhaps don't rely upon id numbers but use of active boolean values
+}
 // function - for delete button, removes data from localstorage
 
 function deleteNote(num) {
     document.querySelector(`#container${num}`).remove()
+    // needs to alter local storage as well (see thought above on boolean active vs id num)
 }
-    // same as above, needs to function relatively
 
 // function - clear form (reset)
