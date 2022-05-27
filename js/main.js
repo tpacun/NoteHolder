@@ -25,10 +25,7 @@ form.addEventListener('submit', (event) => {
 // function - rejects inputs if any of the fields are blank
 
 let formValidator = () => {
-    if (inputId.value === '') {
-        validationMsg.innerHTML = '<p>ID Blank</p>'
-    }
-    else if (inputTitle.value === '') {
+    if (inputTitle.value === '') {
         validationMsg.innerHTML = '<p>Title Blank</p>'
     }
     else if (inputDate.value === '') {
@@ -48,12 +45,20 @@ let formValidator = () => {
 
 let acceptData = () => {
     readData()
-    data.push({
-        'id': inputId.value,
-        'title': inputTitle.value,
-        'date': inputDate.value,
-        'note': inputNote.value,
-    })
+    if (inputId.value === '') {
+        data.push({
+            'title': inputTitle.value,
+            'date': inputDate.value,
+            'note': inputNote.value,
+        })
+    }
+    else {
+        data[inputId.value] = {
+            'title': inputTitle.value,
+            'date': inputDate.value,
+            'note': inputNote.value,
+        }
+    }
     localStorage.setItem('data', JSON.stringify(data))
     console.log('Data Accepted', data)
     readData()
@@ -82,37 +87,41 @@ function readData() {
 function createNotes() {
     displayedNotes.innerHTML = '' // reset notes
     data.forEach((note, i) => {
-        displayedNotes.innerHTML += `
-        <div id="container${note.id}">
-						<h3 id="title${note.id}">${note.title}</h3>
+        displayedNotes.insertAdjacentHTML('beforeend', `
+        <div id="container${i}">
+						<h3 id="title${i}">${note.title}</h3>
 						<div>
-							<button id="editButton${note.id}">Edit Note</button>
-							<button id="deleteButton${note.id}">Delete Note</button>
+							<button id="editButton${i}">Edit Note</button>
+							<button id="deleteButton${i}">Delete Note</button>
 						</div>
-						<span id="date${note.id}">${note.date}</span>
-						<span id="id${note.id}">${note.id}</span>
-						<p id="note${note.id}>${note.note}</p>
+						<span id="date${i}">${note.date}</span>
+						<span id="id${i}">${i}</span>
+						<p id="note${i}>${note.note}</p>
 					</div>
-        `
+        `)
         // need to add event listeners to each button which calls a function which ACCEPTS an id
-        document.querySelector(`#editButton${note.id}`).addEventListener('click', () => {editNote(note.id)})
-        document.querySelector(`#deleteButton${note.id}`).addEventListener('click', () => {deleteNote(note.id)})
+        document.querySelector(`#editButton${i}`).addEventListener('click', () => {editNote(i)})
+        document.querySelector(`#deleteButton${i}`).addEventListener('click', () => {deleteNote(i)})
     })
 }
 
 // function - for edit button, moves data to form, removes data from localstorage
 
 function editNote(num) {
-    // perhaps write delete function first - easier
-    // needs to accept an id #
-    // needs to deal with it in relativity
-    // also might need to rethink structure of data object - perhaps don't rely upon id numbers but use of active boolean values
+    inputId.value = num
+    inputDate.value = data[num].date
+    inputNote.value = data[num].note
+    inputTitle.value = data[num].title
+    document.querySelector(`#container${num}`).remove()
 }
+
 // function - for delete button, removes data from localstorage
 
 function deleteNote(num) {
     document.querySelector(`#container${num}`).remove()
-    // needs to alter local storage as well (see thought above on boolean active vs id num)
+    data.splice(num, 1)
+    localStorage.setItem('data', JSON.stringify(data))
+
 }
 
 // function - clear form (reset)
