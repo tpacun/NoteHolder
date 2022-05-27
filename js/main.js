@@ -37,6 +37,7 @@ let formValidator = () => {
     else {
         validationMsg.innerHtml = ''
         acceptData()
+        clearForm()
     }
 }
 
@@ -82,8 +83,6 @@ function readData() {
 
 // function - load notes into html
 
-
-
 function createNotes() {
     displayedNotes.innerHTML = '' // reset notes
     data.forEach((note, i) => {
@@ -125,3 +124,11 @@ function deleteNote(num) {
 }
 
 // function - clear form (reset)
+
+function clearForm() {
+    inputId.value = ''
+    inputTitle.value = ''
+    inputDate.value = ''
+    inputNote.value = ''
+
+}
