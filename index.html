@@ -15,41 +15,19 @@
 
 		<!-- Page Wrapper -->
 			<div id="page-wrapper">
-				<section id="banner">
-					<h2>Add a Note</h2>
-			<!-- Form with fields for title date and note. Hidden field for id #-->
-			<form>
-				<label for="number">Note ID # (for internal use)</label>
-				<input type="number" name="idNumber" id="inputId" readonly>
-				<label for="title">Title:</label>
-				<input type="text" name="title" id="inputTitle">
-				<label for="date">Date:</label>
-				<input type="date" name="date" id="inputDate">
-				<label for="noteText">Note:</label>
-				<input type="text" name="noteText" id="inputNote">
-				<!-- Div for response from data Validation -->
-				<div class="validationMsg"></div>
-				<button type="submit">Add Note</button>
-			</form>
-				</section>
 
 				<!-- Wrapper -->
 					<section id="wrapper">
-						<h2>Notes</h2>
-				<div class="notesDiv">
-					<!-- Each note will be in a div with spans for id, title, and date and p for text. Also will need to have two buttons for editing and deleting. Format is as follows (see full implementation in createNotes()): 
-					<div id="">
-						<h3>Note Title</h3>
-						<div>
-							<button>Edit Note</button>
-							<button>Delete Note</button>
-						</div>
-						<span>Date</span>
-						<span>ID#</span>
-						<p>Note Text</p>
-					</div>
-					-->
-				</div>
+						<div class="inner">
+							<h1><b>Split</b>screen</h1>
+							<h2>Ipsum feugiat lorem tempus<br />
+							adipiscing sed nullam</h2>
+							<p>Phasellus amet dignissim malesuada lorem vitae. Fusce amet lectus
+							tempor amet vulputate et proin ultrices etiam odio elementum lorem
+							malesuada sem mollis elementum feugiat lorem.</p>
+							<ul class="actions">
+								<li><a href="#" class="button primary icon solid fa-arrow-down">Download</a></li>
+							</ul>
 							<!--
 							<hr />
 							<h3>Form Stuff</h3>
@@ -104,7 +82,19 @@
 					</section>
 
 				<!-- Banner -->
-
+					<section id="banner">
+						<div class="inner">
+							<div class="content">
+								<ul>
+									<li><img src="images/pic01.jpg" alt="" /></li>
+									<li><img src="images/pic02.jpg" alt="" /></li>
+									<li><img src="images/pic03.jpg" alt="" /></li>
+									<li><img src="images/pic04.jpg" alt="" /></li>
+									<li><img src="images/pic05.jpg" alt="" /></li>
+								</ul>
+							</div>
+						</div>
+					</section>
 
 			</div>
 
