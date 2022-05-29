@@ -3,7 +3,7 @@ A webapp I wrote that will take quick notes in the browser. Includes ability to 
 
 **Link to project:** https://note-holder.netlify.app
 
-![alt tag](http://placecorgi.com/1200/650)
+![alt tag](/planning/screenshot_website.png)
 
 ## How It's Made:
 
