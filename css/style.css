@@ -21,22 +21,88 @@
 /* BASE STYLES
 /*******************************************/
 
-body {
-
+html, body {
+     width: 100%;
+     height: 90%;
 }
-
 
 /******************************************
 /* LAYOUT
 /*******************************************/
-header {
 
+main {
+     display: flex;
+     margin-top:5em;
+     height: 100%;
+     width: 100%;
+}
+
+.right, .left {
+     width: 50%;
+     margin: 2%;
+     border: solid darkgray 3px;
+     height: 85%;
+     padding: 0 1% 1% 1%;
+
+}
+
+.right {
+     overflow: scroll;
+     overflow-x: hidden;
+     position: relative;
+}
+
+form > * {
+     display:block;
+}
+
+header {
+     position: fixed;
+     top: 0;
+     left: 0;
+     right: 0;
+     height: 10%;
+     background-color: lightblue;
+     padding: .5em;
+}
+
+header h1 {
+     margin: 0;
+     padding: .5em 0;
+}
+
+#inputId {
+     background-color: lightgray;
+}
+
+.noteContainer {
+     background-color: lightyellow;
+     border: 1px solid black;
+     margin: 2%;
+     padding: 1%;
+}
+
+.noteContainer h3, p, span {
+     margin-block-start: .5em;
+     margin-block-end: .5em;
+}
+
+.buttonsContainer {
+     display: inline;
 }
 
 footer {
-
+     position: fixed;
+     bottom: 0;
+     left: 0;
+     right: 0;
+     height: 6%;
+     background: lightblue;
 }
 
+footer p {
+     margin: .5em;
+}
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/

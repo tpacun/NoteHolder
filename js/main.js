@@ -87,16 +87,17 @@ function createNotes() {
     displayedNotes.innerHTML = '' // reset notes
     data.forEach((note, i) => {
         displayedNotes.insertAdjacentHTML('beforeend', `
-        <div id="container${i}">
-						<h3 id="title${i}">${note.title}</h3>
-						<div>
-							<button id="editButton${i}">Edit Note</button>
-							<button id="deleteButton${i}">Delete Note</button>
-						</div>
-						<span id="date${i}">${note.date}</span>
-						<span id="id${i}">${i}</span>
-						<p id="note${i}>${note.note}</p>
-					</div>
+        <div class="noteContainer" id="container${i}">
+            <span id="id${i}">Note #${i}</span>
+            <div class="buttonsContainer">
+                <button id="editButton${i}">Edit Note</button>
+                <button id="deleteButton${i}">Delete Note</button>
+            </div>
+            <h3 id="title${i}">${note.title}</h3>
+			<span id="date${i}">Date: ${note.date}</span>
+            <p id="note${i}">${note.note}</p>
+
+        </div>
         `)
         // need to add event listeners to each button which calls a function which ACCEPTS an id
         document.querySelector(`#editButton${i}`).addEventListener('click', () => {editNote(i)})
