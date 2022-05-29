@@ -1064,10 +1064,6 @@ input, select, textarea {
 		width: 65vw;
 	}
 
-		#wrapper:before {
-			content: '';
-		}
-
 		#wrapper .inner {
 			max-width: 30em;
 		}
@@ -1215,7 +1211,7 @@ input, select, textarea {
 		-moz-align-items: center;
 		-webkit-align-items: center;
 		-ms-align-items: center;
-		align-items: center;
+		align-items: flex-start;
 		-moz-justify-content: center;
 		-webkit-justify-content: center;
 		-ms-justify-content: center;
@@ -1223,6 +1219,7 @@ input, select, textarea {
 		background: #e6e8eb;
 		overflow: hidden;
 		width: 35vw;
+		padding: 1.5em;
 	}
 
 		#banner .inner {
@@ -1412,6 +1409,17 @@ input, select, textarea {
 	}
 
 .buttonsContainer {
+	display: inline;	
+}
+
+#wrapper .inner img {
+	width: 2em;
+}
+
+.inner h1 {
 	display: inline;
-	
+}
+
+#inputId {
+	background-color: darkgray;
 }
