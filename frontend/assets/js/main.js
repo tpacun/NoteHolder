@@ -39,6 +39,7 @@ let inputDate = document.querySelector('#inputDate')
 let inputNote = document.querySelector('#inputNote')
 let validationMsg = document.querySelector('.validationMsg')
 let form = document.querySelector('form')
+const API_URL = '/api/notes'
 let data = []
 
 // call load function at top of page
@@ -60,9 +61,6 @@ let formValidator = () => {
     if (inputTitle.value === '') {
         validationMsg.innerHTML = '<p>Title Blank</p>'
     }
-    else if (inputDate.value === '') {
-        validationMsg.innerHTML = '<p>Date Blank</p>'
-    }
     else if (inputNote.value === '') {
         validationMsg.innerHTML = '<p>Note Blank</p>'
     }
@@ -76,31 +74,40 @@ let formValidator = () => {
 // function - write data to localstorage
 
 
-let acceptData = () => {
-    readData()
+let acceptData = async () => {
+
+//   readData()
     if (inputId.value === '') {
-        data.push({
-            'title': inputTitle.value,
-            'date': inputDate.value,
-            'note': inputNote.value,
+        const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'title': inputTitle.value,
+                'text': inputNote.value})
         })
     }
     else {
-        data[inputId.value] = {
-            'title': inputTitle.value,
-            'date': inputDate.value,
-            'note': inputNote.value,
-        }
+        const response = await fetch(API_URL + '/' + inputId.value, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'title': inputTitle.value,
+                'text': inputNote.value})
+        })
     }
-    localStorage.setItem('data', JSON.stringify(data))
-    console.log('Data Accepted', data)
+    console.log('Data Accepted')
     readData()
 }
 
 // function - load data from localstorage and display on page
 
-function readData() {
-    data = JSON.parse(localStorage.getItem('data'))
+async function readData() {
+    let response = await fetch(API_URL)
+    data = await response.json()
     
     // not sure if will/would have reason to keep this separate from placing updated data into the html, but going to keep the load/parsing separate from that for now
 
@@ -119,40 +126,42 @@ function createNotes() {
     displayedNotes.innerHTML = '' // reset notes
     data.forEach((note, i) => {
         displayedNotes.insertAdjacentHTML('beforeend', `
-        <div class="noteContainer" id="container${i}">
-            <span id="id${i}">Note #${i}</span>
+        <div class="noteContainer" id="container${note._id}">
+            <span id="id${note._id}">Note #${i}</span>
             <div class="buttonsContainer">
-                <button id="editButton${i}">Edit Note</button>
-                <button id="deleteButton${i}">Delete Note</button>
+                <button id="editButton${note._id}">Edit Note</button>
+                <button id="deleteButton${note._id}">Delete Note</button>
             </div>
-            <h3 id="title${i}">${note.title}</h3>
-			<span id="date${i}">Date: ${note.date}</span>
-            <p id="note${i}">${note.note}</p>
+            <h3 id="title${note._id}">${note.title}</h3>
+			<span id="date${note._id}">Date: ${note.timestamp}</span>
+            <p id="note${note._id}">${note.text ? note.text:''}</p>
 
         </div>
         `)
         // need to add event listeners to each button which calls a function which ACCEPTS an id
-        document.querySelector(`#editButton${i}`).addEventListener('click', () => {editNote(i)})
-        document.querySelector(`#deleteButton${i}`).addEventListener('click', () => {deleteNote(i)})
+        document.querySelector(`#editButton${note._id}`).addEventListener('click', () => {editNote(i)})
+        document.querySelector(`#deleteButton${note._id}`).addEventListener('click', () => {deleteNote(i)})
     })
 }
 
 // function - for edit button, moves data to form, removes data from localstorage
 
 function editNote(num) {
-    inputId.value = num
-    inputDate.value = data[num].date
-    inputNote.value = data[num].note
+    inputId.value = data[num]._id
+    inputNote.value = data[num].text ? data[num].text:''
     inputTitle.value = data[num].title
-    document.querySelector(`#container${num}`).remove()
+    document.querySelector(`#container${data[num]._id}`).remove()
 }
 
 // function - for delete button, removes data from localstorage
 
-function deleteNote(num) {
-    document.querySelector(`#container${num}`).remove()
+async function deleteNote(num) {
+    const response = await fetch(API_URL + '/' + data[num]._id, {
+        method: 'DELETE'
+    })
+
+    document.querySelector(`#container${data[num]._id}`).remove()
     data.splice(num, 1)
-    localStorage.setItem('data', JSON.stringify(data))
 
 }
 

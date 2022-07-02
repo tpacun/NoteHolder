@@ -51,7 +51,7 @@ const updateNote = asyncHandler(async (req, res) => {
 const deleteNote = asyncHandler(async (req, res) => {
 
     const note = await noteModel.deleteOne(
-        {id: req.params.id })
+        {_id: req.params.id })
 
     res.status(200).json(note)
 })
