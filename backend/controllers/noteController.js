@@ -31,13 +31,14 @@ const setNote = asyncHandler(async (req, res, next) => {
 
 const updateNote = asyncHandler(async (req, res) => {
 
-    if (!req.body.text){
+    if (!req.body.text || !req.body.title){
         res.status(400)
-        throw new Error('Please add text')
+        throw new Error('Please add text and title')
     }
 
     const note = await noteModel.updateOne(
-        { id: req.params.id}, 
+        {id: req.params.id},
+        {title: req.body.title},
         {text: req.body.text}
         )
 
