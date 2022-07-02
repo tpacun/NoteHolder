@@ -13,12 +13,13 @@ const getNotes = asyncHandler(async (req, res) => {
 // POST /api/notes
 
 const setNote = asyncHandler(async (req, res, next) => {
-    if (!req.body.text){
+    if (!req.body.text || !req.body.title){
         res.status(400)
-        throw new Error('Please add text')
+        throw new Error('Missing text or title')
     }
 
     const note = await noteModel.create({
+        title: req.body.title,
         text: req.body.text
     })
 
