@@ -38,8 +38,8 @@ const updateNote = asyncHandler(async (req, res) => {
 
     const note = await noteModel.updateOne(
         {_id: req.params.id},
-        {title: req.body.title},
-        {text: req.body.text}
+        {title: req.body.title,
+        text: req.body.text}
         )
 
     res.status(200).json(note)
