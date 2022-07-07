@@ -1,7 +1,7 @@
 # NoteHolder
 A webapp I wrote that will take quick notes in the browser. Includes ability to edit and delete the notes, as well as save them statically within local storage so you can come back to them after leaving the page.
 
-**Link to project:** https://note-holder.netlify.app
+**Link to project:** https://noteholderapp.herokuapp.com/
 
 ![alt tag](/planning/screenshot_website.png)
 

@@ -13,10 +13,9 @@ const noteSchema = mongoose.Schema({
     text: {
         type: String,
         required: [true, 'Please add a text value']
-    },
-    timestamps: {
-        required: true
-}})
+    }},
+    {timestamps: true}
+    )
 
 const noteModel = mongoose.model('Notes', noteSchema)
 

@@ -17,12 +17,10 @@ const userSchema = mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Please add a password']
-    },
-    timestamps: {
-        required: true
-    }
-})
+    }},
+    {timestamps: true}
+    )
 
-const userModel = mongoose.Model('User', userSchema)
+const userModel = mongoose.model('User', userSchema)
 
-export {userModel}
+export { userModel }

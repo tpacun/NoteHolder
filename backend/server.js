@@ -1,6 +1,7 @@
 import express from 'express'
 import 'dotenv/config'
 import { router } from './routes/noteRoutes.js'
+import { userRouter } from './routes/userRoutes.js'
 import { errorHandler } from './middleware/errorMiddleware.js'
 import { connectDB } from './config/db.js'
 import path from 'path'
@@ -14,6 +15,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
 app.use('/api/notes', router)
+app.use('/api/user', userRouter)
 
 // Serve frontend
 
