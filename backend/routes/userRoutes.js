@@ -1,8 +1,8 @@
 import express from 'express'
-import { getUser, registerUser, deleteUser } from '../controllers/userController.js'
+import { getUser, registerUser} from '../controllers/userController.js'
 
 const userRouter = express.Router()
 
-userRouter.route('/').get(getUser).put(registerUser).delete(deleteUser)
+userRouter.route('/').get(getUser).post(registerUser)
 
 export {userRouter}
