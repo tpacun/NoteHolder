@@ -19,7 +19,7 @@ const protect = asyncHandler(async(req, res, next) => {
     try {
 
         const tokenString = sentTokenResArray[1]
-        const authorizeToken = await jwt.verify(tokenString, process.env.JWT_SECRET_KEY)
+        const authorizeToken = jwt.verify(tokenString, process.env.JWT_SECRET_KEY)
 
         req.body.user = await userModel.findById({_id: authorizeToken.id})
         next()
