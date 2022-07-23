@@ -8,6 +8,7 @@ A webapp I wrote that will take quick notes in the browser. Includes ability to 
 ## How It's Made:
 
 **Tech used:** HTML, CSS, JavaScript
+7/22/22: updated to include MongoDB, Express
 
 Based upon my previous experiences and struggles with project creep, I wanted to go into this one with a plan. Before starting to write code, I actually sat down and designed the functionality I wanted it to have. This was just a simple flowchart but I found forcing myself to think about the implemenation of each function before getting into the weeds was super helpful. When I did start to actually write the code, I found that this helped with keeping each function more succinct as well as stopped me from accidentally starting to creep beyond the initial scope of the project. I've included this in the repo and below:
 
